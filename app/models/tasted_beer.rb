@@ -1,0 +1,3 @@
+class TastedBeer < ApplicationRecord
+end
+

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.0'
+ruby "3.2.0"
 
 # Rails API-only components (no sprockets, no assets)
 gem 'railties', '~> 6.1.7'
@@ -13,7 +13,7 @@ gem 'actionpack', '~> 6.1.7'
 gem 'actionview', '~> 6.1.7'
 
 # Required for Ruby 2.6 compatibility
-gem 'logger'
+# gem 'logger'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4'
@@ -36,3 +36,9 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'dotenv-rails', groups: [:development, :test]
+gem 'activestorage'
+gem 'aws-sdk-s3', require: false
+
+gem 'pg', group: :production

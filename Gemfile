@@ -41,4 +41,4 @@ gem 'dotenv-rails', groups: [:development, :test]
 gem 'activestorage'
 gem 'aws-sdk-s3', require: false
 
-gem 'pg', group: :production
+gem 'pg'

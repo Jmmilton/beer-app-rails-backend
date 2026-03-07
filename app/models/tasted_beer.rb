@@ -1,3 +1,0 @@
-class TastedBeer < ApplicationRecord
-end
-

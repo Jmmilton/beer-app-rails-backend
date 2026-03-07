@@ -31,7 +31,7 @@ Rails.application.configure do
   end
 
   # Active Storage disabled for API-only app
-  # config.active_storage.service = :local
+  config.active_storage.service = :supabase
 
   # Action Mailer disabled for API-only app
   # config.action_mailer.raise_delivery_errors = false

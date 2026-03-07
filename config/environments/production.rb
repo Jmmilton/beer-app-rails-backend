@@ -36,7 +36,7 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
   # Active Storage disabled for API-only app
-  # config.active_storage.service = :local
+  config.active_storage.service = :supabase
 
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil

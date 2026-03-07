@@ -2,15 +2,26 @@ class BeersController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:create]
   
   def index
-    brewed = BrewedBeer.all.map { |b| b.as_json.merge(source: "brewed") }
+    @beers = Beer.all
 
-    tasted = TastedBeer.all.map { |b| b.as_json.merge(source: "tasted") }
+    render json: {
+      beers: @beers,
+      total: @beers.count,
+      brewed_count: Beer.brewed.count,
+      tasted_count: Beer.tasted.count
+    }
+  end
 
-    beers = brewed + tasted
+  def all
+    render json: Beer.all
+  end
 
-    beers.sort_by! { |b| b["created_at"] }.reverse!
+  def brewed
+    render json: Beer.brewed
+  end
 
-    render json: beers
+  def tasted
+    render json: Beer.tasted
   end
 
   def create
@@ -24,14 +35,20 @@ class BeersController < ApplicationController
     end
   end
 
+  def as_json(options = {})
+    super.merge(
+      image_url: image.attached? ? Rails.application.routes.url_helpers.url_for(image) : nil
+    )
+  end
+
   private
 
   def beer_class
     case params[:variant]
     when "homebrew"
-      BrewedBeer
+      Beer.brewed
     when "tasted"
-      TastedBeer
+      Beer.tasted
     else
       raise ActionController::BadRequest, "Invalid beer variant"
     end
@@ -39,7 +56,7 @@ class BeersController < ApplicationController
 
   def beer_params
     common = [
-      :title,
+      :name,
       :description,
       :style,
       :abv,

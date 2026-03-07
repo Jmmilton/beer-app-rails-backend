@@ -15,7 +15,7 @@ require "rails/test_unit/railtie"
 # require "action_mailbox/engine"
 # require "action_text/engine"
 # require "action_cable/engine"
-# require "active_storage/engine"
+require "active_storage/engine"
 # require "sprockets/railtie"
 
 Bundler.require(*Rails.groups)

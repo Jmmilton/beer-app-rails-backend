@@ -26,6 +26,10 @@ class BeersController < ApplicationController
 
   def create
     beer = beer_class.new(beer_params)
+
+    if params[:beer][:beer_image].present?
+      beer.image.attach(params[:beer][:beer_image])
+    end
     
     if beer.save
       render json: beer, status: :created
@@ -61,7 +65,6 @@ class BeersController < ApplicationController
       :style,
       :abv,
       :rating,
-      :beer_image,
       :favourite,
       :beer_type
     ]

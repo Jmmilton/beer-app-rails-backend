@@ -1,5 +1,4 @@
 class BeersController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:create]
   
   def index
     @beers = Beer.all
@@ -39,10 +38,16 @@ class BeersController < ApplicationController
     end
   end
 
-  def as_json(options = {})
-    super.merge(
-      image_url: image.attached? ? Rails.application.routes.url_helpers.url_for(image) : nil
-    )
+  def show
+    @beers = Beer.find(params[:id])
+    render json: {
+      beers: @beers
+    }
+  end
+
+  def destroy
+    @beers = Beer.find(params[:id])
+    @beers.destroy
   end
 
   private

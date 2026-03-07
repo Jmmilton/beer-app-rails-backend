@@ -1,7 +1,2 @@
-class ApplicationController < ActionController::Base
-
-  def csrf_token
-    render plain: form_authenticity_token
-  end
-
+class ApplicationController < ActionController::API
 end

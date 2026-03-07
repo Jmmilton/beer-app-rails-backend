@@ -88,3 +88,4 @@ class BeersController < ApplicationController
   end
 
 end
+

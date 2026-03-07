@@ -1,12 +1,6 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+require "open-uri"
 
-Beer.create!([
+beers_data = [
   {
     name: "Sunset Haze",
     description: "A juicy, hazy IPA bursting with tropical fruit aromas and a soft, pillowy mouthfeel.",
@@ -17,10 +11,8 @@ Beer.create!([
     favourite: true,
     location: "Toronto, ON",
     brewing_notes: "Dry hopped with Citra and Mosaic. Fermented at 19C for 7 days.",
-    tasting_notes: nil,
     date_brewed: Date.new(2024, 11, 10),
-    date_tasted: nil,
-    beer_image: "https://images.pexels.com/photos/1552630/pexels-photo-1552630.jpeg"
+    image_url: "https://images.pexels.com/photos/1552630/pexels-photo-1552630.jpeg"
   },
   {
     name: "Midnight Stout",
@@ -32,10 +24,8 @@ Beer.create!([
     favourite: true,
     location: "Toronto, ON",
     brewing_notes: "Aged on toasted oak chips for 2 weeks. Used Maris Otter malt base.",
-    tasting_notes: nil,
     date_brewed: Date.new(2024, 10, 3),
-    date_tasted: nil,
-    beer_image: "https://images.pexels.com/photos/1269043/pexels-photo-1269043.jpeg"
+    image_url: "https://images.pexels.com/photos/1269043/pexels-photo-1269043.jpeg"
   },
   {
     name: "Collective Arts Rhyme & Reason",
@@ -46,11 +36,9 @@ Beer.create!([
     rating: 3.9,
     favourite: false,
     location: "Hamilton, ON",
-    brewing_notes: nil,
     tasting_notes: "Light and refreshing. Good for a patio beer. Slight grapefruit finish.",
-    date_brewed: nil,
     date_tasted: Date.new(2025, 1, 15),
-    beer_image: "https://images.pexels.com/photos/3566218/pexels-photo-3566218.jpeg"
+    image_url: "https://images.pexels.com/photos/3566218/pexels-photo-3566218.jpeg"
   },
   {
     name: "Brickworks Batch 1000",
@@ -61,11 +49,9 @@ Beer.create!([
     rating: 3.5,
     favourite: false,
     location: "Toronto, ON",
-    brewing_notes: nil,
     tasting_notes: "Solid everyday beer. Not too hoppy, slightly sweet malt finish.",
-    date_brewed: nil,
     date_tasted: Date.new(2025, 2, 20),
-    beer_image: "https://images.pexels.com/photos/5947019/pexels-photo-5947019.jpeg"
+    image_url: "https://images.pexels.com/photos/5947019/pexels-photo-5947019.jpeg"
   },
   {
     name: "Golden Wheat",
@@ -77,9 +63,18 @@ Beer.create!([
     favourite: false,
     location: "Toronto, ON",
     brewing_notes: "Used WB-06 yeast. Mash temp 65C. Bottle conditioned for 2 weeks.",
-    tasting_notes: nil,
     date_brewed: Date.new(2025, 1, 28),
-    date_tasted: nil,
-    beer_image: "https://images.pexels.com/photos/4194860/pexels-photo-4194860.jpeg"
+    image_url: "https://images.pexels.com/photos/4194860/pexels-photo-4194860.jpeg"
   }
-])
+]
+
+beers_data.each do |data|
+  image_url = data.delete(:image_url)
+  beer = Beer.create!(data)
+  beer.image.attach(
+    io: URI.open(image_url),
+    filename: "#{beer.name.parameterize}.jpg",
+    content_type: "image/jpeg"
+  )
+  puts "Created: #{beer.name}"
+end

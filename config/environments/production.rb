@@ -117,4 +117,16 @@ Rails.application.configure do
   Rails.application.routes.default_url_options[:host] = 'beer-app-9176f650f6bf.herokuapp.com'
   Rails.application.routes.default_url_options[:protocol] = 'https'
 
+  config.action_mailer.default_url_options = { host: 'beer-app-9176f650f6bf.herokuapp.com' }
+  
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtp-relay.brevo.com',
+    port: 587,
+    user_name: ENV['BREVO_USERNAME'],
+    password: ENV['BREVO_PASSWORD'],
+    authentication: 'login',
+    enable_starttls_auto: true
+  }
+  
 end

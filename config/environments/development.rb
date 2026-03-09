@@ -72,4 +72,16 @@ Rails.application.configure do
   Rails.application.routes.default_url_options[:host] = 'localhost:3000'
   Rails.application.routes.default_url_options[:protocol] = 'http'
 
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtp-relay.brevo.com',
+    port: 587,
+    user_name: ENV['BREVO_USERNAME'],
+    password: ENV['BREVO_PASSWORD'],
+    authentication: 'login',
+    enable_starttls_auto: true
+  }
+
 end

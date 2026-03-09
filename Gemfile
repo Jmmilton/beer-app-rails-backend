@@ -42,3 +42,6 @@ gem 'activestorage'
 gem 'aws-sdk-s3', require: false
 
 gem 'pg'
+gem "devise"
+gem 'devise-jwt'
+gem 'actionmailer'

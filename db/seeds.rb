@@ -3,6 +3,7 @@ require "open-uri"
 user = User.find_or_create_by!(email: ENV["SEED_USER_EMAIL"]) do |u|
   u.password = ENV["SEED_USER_PASSWORD"]
   u.password_confirmation = ENV["SEED_USER_PASSWORD"]
+  u.skip_confirmation!
 end
 
 beers_data = [

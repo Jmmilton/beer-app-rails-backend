@@ -1,6 +1,6 @@
 require_relative "boot"
 
-require "rails"
+require "rails/all"
 
 # Core railties needed for API
 require "active_record/railtie"

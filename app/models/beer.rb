@@ -1,4 +1,5 @@
 class Beer < ApplicationRecord
+  belongs_to :user
   has_one_attached :image
 
   scope :brewed, -> { where(beer_type: "brewed") }
@@ -9,7 +10,7 @@ class Beer < ApplicationRecord
       image_url: image.attached? ? Rails.application.routes.url_helpers.url_for(image) : nil
     )
   end
-  
+
 end
 
  

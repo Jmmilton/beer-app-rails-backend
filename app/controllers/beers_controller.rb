@@ -1,30 +1,31 @@
 class BeersController < ApplicationController
+  before_action :authenticate_user!
   
   def index
-    @beers = Beer.all
+    @beers = current_user.beers
 
     render json: {
       beers: @beers,
       total: @beers.count,
-      brewed_count: Beer.brewed.count,
-      tasted_count: Beer.tasted.count
+      brewed_count: current_user.beers.brewed.count,
+      tasted_count: current_user.beers.tasted.count
     }
   end
 
   def all
-    render json: Beer.all
+    render json: current_user.beers
   end
 
   def brewed
-    render json: Beer.brewed
+    render json: current_user.beers.brewed
   end
 
   def tasted
-    render json: Beer.tasted
+    render json: current_user.beers.tasted
   end
 
   def create
-    beer = beer_class.new(beer_params)
+    beer = current_user.beers.new(beer_params)
 
     if params[:beer][:beer_image].present?
       beer.image.attach(params[:beer][:beer_image])
@@ -39,29 +40,28 @@ class BeersController < ApplicationController
   end
 
   def show
-    @beers = Beer.find(params[:id])
-    render json: {
-      beers: @beers
-    }
+    @beers = current_user.beers.find(params[:id])
+    render json: @beer
   end
 
   def destroy
-    @beers = Beer.find(params[:id])
-    @beers.destroy
+    @beer = current_user.beers.find(params[:id])
+    @beer.destroy
+    render json: {}, status: :no_content
   end
 
   private
 
-  def beer_class
-    case params[:variant]
-    when "homebrew"
-      Beer.brewed
-    when "tasted"
-      Beer.tasted
-    else
-      raise ActionController::BadRequest, "Invalid beer variant"
-    end
-  end
+  # def beer_class
+  #   case params[:variant]
+  #   when "homebrew"
+  #     Beer.brewed
+  #   when "tasted"
+  #     Beer.tasted
+  #   else
+  #     raise ActionController::BadRequest, "Invalid beer variant"
+  #   end
+  # end
 
   def beer_params
     common = [

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2026_03_09_025602) do
+ActiveRecord::Schema.define(version: 2026_03_10_012809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_graphql"
@@ -63,6 +63,8 @@ ActiveRecord::Schema.define(version: 2026_03_09_025602) do
     t.string "tasting_notes"
     t.date "date_brewed"
     t.date "date_tasted"
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_beers_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -77,12 +79,15 @@ ActiveRecord::Schema.define(version: 2026_03_09_025602) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
+    t.string "jti"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["jti"], name: "index_users_on_jti"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.check_constraint "(email_change_confirm_status >= 0) AND (email_change_confirm_status <= 2)", name: "users_email_change_confirm_status_check"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "beers", "users"
 end

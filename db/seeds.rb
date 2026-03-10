@@ -6,6 +6,8 @@ user = User.find_or_create_by!(email: ENV["SEED_USER_EMAIL"]) do |u|
   u.skip_confirmation!
 end
 
+user.confirm unless user.confirmed?
+
 beers_data = [
   {
     name: "Sunset Haze",

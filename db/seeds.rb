@@ -76,7 +76,7 @@ beers_data = [
 
 beers_data.each do |data|
   image_url = data.delete(:image_url)
-  beer = Beer.create!(data)
+  beer = Beer.create!(data.merge(user: user))
   beer.image.attach(
     io: URI.open(image_url),
     filename: "#{beer.name.parameterize}.jpg",

@@ -53,7 +53,7 @@ beers_data = [
     location: "Hamilton, ON",
     tasting_notes: "Light and refreshing. Good for a patio beer. Slight grapefruit finish.",
     date_tasted: Date.new(2025, 1, 15),
-    image_url: "https://images.pexels.com/photos/3566218/pexels-photo-3566218.jpeg"
+    image_url: "https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=800"
   },
   {
     name: "Brickworks Batch 1000",
@@ -66,7 +66,7 @@ beers_data = [
     location: "Toronto, ON",
     tasting_notes: "Solid everyday beer. Not too hoppy, slightly sweet malt finish.",
     date_tasted: Date.new(2025, 2, 20),
-    image_url: "https://images.pexels.com/photos/5947019/pexels-photo-5947019.jpeg"
+    image_url: "https://images.unsplash.com/photo-1608270586620-248524c67de9?w=800"
   },
   {
     name: "Golden Wheat",
@@ -79,7 +79,8 @@ beers_data = [
     location: "Toronto, ON",
     brewing_notes: "Used WB-06 yeast. Mash temp 65C. Bottle conditioned for 2 weeks.",
     date_brewed: Date.new(2025, 1, 28),
-    image_url: "https://images.pexels.com/photos/4194860/pexels-photo-4194860.jpeg"
+    image_url: "https://images.unsplash.com/photo-1571613316887-6f8d5cbf7ef7?w=800"
+
   }
 ]
 

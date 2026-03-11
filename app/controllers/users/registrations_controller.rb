@@ -7,6 +7,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
         sign_in(resource)
       end
     end
+  rescue ActiveRecord::RecordNotUnique
+    render json: { error: "An account with this email already exists" }, status: :unprocessable_entity
   end
 
   private

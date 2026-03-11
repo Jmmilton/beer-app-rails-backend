@@ -25,6 +25,7 @@ module BeerAppBackend
     # API-only config
     config.load_defaults 6.1
     config.api_only = true
+    config.middleware.use Rack::Attack
     
     # JSON responses only
     config.generators do |g|

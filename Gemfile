@@ -46,3 +46,4 @@ gem "devise"
 gem 'devise-jwt'
 gem 'actionmailer'
 gem 'responders'
+gem 'rack-attack'

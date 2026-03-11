@@ -6,4 +6,9 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable, :confirmable, :recoverable, :rememberable,
          :jwt_authenticatable, jwt_revocation_strategy: self
+
+  def demo?
+    email == "demo@mybrews.app"
+  end
+
 end

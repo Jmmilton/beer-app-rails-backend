@@ -6,6 +6,13 @@ user = User.find_or_create_by!(email: ENV["SEED_USER_EMAIL"]) do |u|
   u.skip_confirmation!
 end
 
+demo_user = User.find_or_create_by!(email: "demo@mybrews.app") do |u|
+  u.password = "demo"
+  u.password_confirmation = "demo"
+  u.skip_confirmation!
+end
+
+demo_user.confirm unless demo_user.confirmed?
 user.confirm unless user.confirmed?
 
 beers_data = [

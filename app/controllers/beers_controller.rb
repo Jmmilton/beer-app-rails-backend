@@ -40,8 +40,8 @@ class BeersController < ApplicationController
   end
 
   def show
-    @beers = current_user.beers.find(params[:id])
-    render json: @beer
+    @beer = current_user.beers.find(params[:id])
+    render json: { beer: @beer }
   end
 
   def destroy

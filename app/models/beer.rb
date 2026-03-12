@@ -12,13 +12,9 @@ class Beer < ApplicationRecord
   end
 
   def beer_image
-    if image.attached?
-      image.variant(
-        format: :jpg,
-        resize_to_limit: [1200, 1200],
-        quality: 85
-      ).processed.url
-    end
+    return nil unless image.attached?
+    blob = image.blob
+    "https://#{ENV['SUPABASE_PROJECT_REF']}.supabase.co/storage/v1/object/public/#{ENV['SUPABASE_BUCKET']}/#{blob.key}"
   end
 
 end

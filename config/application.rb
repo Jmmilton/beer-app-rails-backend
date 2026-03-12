@@ -26,6 +26,7 @@ module BeerAppBackend
     config.load_defaults 6.1
     config.api_only = true
     config.middleware.use Rack::Attack
+    config.active_storage.variant_processor = :vips
     
     # JSON responses only
     config.generators do |g|

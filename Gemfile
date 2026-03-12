@@ -47,3 +47,4 @@ gem 'devise-jwt'
 gem 'actionmailer'
 gem 'responders'
 gem 'rack-attack'
+gem "image_processing", "~> 1.2"

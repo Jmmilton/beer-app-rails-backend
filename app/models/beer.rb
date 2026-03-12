@@ -11,6 +11,12 @@ class Beer < ApplicationRecord
     )
   end
 
+  def beer_image
+    if image.attached?
+      image.variant(convert: 'jpg', saver: { quality: 85 }).processed.url
+    end
+  end
+
 end
 
  

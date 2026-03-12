@@ -7,7 +7,7 @@ class Beer < ApplicationRecord
 
   def as_json(options = {})
     super.merge(
-      image_url: image.attached? ? Rails.application.routes.url_helpers.url_for(image) : nil
+      beer_image: image.attached? ? beer_image : nil
     )
   end
 

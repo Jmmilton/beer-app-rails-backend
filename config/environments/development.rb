@@ -76,12 +76,10 @@ Rails.application.configure do
   
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: 'smtp-relay.brevo.com',
-    port: 587,
-    user_name: ENV['BREVO_USERNAME'],
-    password: ENV['BREVO_PASSWORD'],
-    authentication: 'login',
-    enable_starttls_auto: true
+    :address   => 'smtp.resend.com',
+    :port      => 465,
+    :user_name => 'resend',
+    :password  => ENV['RESEND_API_KEY'],
+    :tls => true
   }
-
 end

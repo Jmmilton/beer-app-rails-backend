@@ -1,3 +1,4 @@
+require 'cgi'
 class CustomDeviseMailer < Devise::Mailer
   def reset_password_instructions(record, token, opts = {})
     @token = token
@@ -15,7 +16,7 @@ class CustomDeviseMailer < Devise::Mailer
   def confirmation_instructions(record, token, opts = {})
     @token = token
     @resource = record
-    @url = "#{ENV['FRONTEND_URL']}/#/confirm-email?confirmation_token=#{token}"
+    @url = "#{ENV['FRONTEND_URL']}/#/confirm-email?confirmation_token=#{token}&email=#{CGI.escape(record.email)}"
     mail(
       to: record.email,
       from: Devise.mailer_sender,
